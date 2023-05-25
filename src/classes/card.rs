@@ -1,8 +1,8 @@
-use std::fmt::{Debug, self};
+use std::fmt::{self, Debug};
 
 use rand::Rng;
 
-use super::enums::{Suit, CardValue};
+use super::enums::{CardValue, Suit};
 
 pub struct Card {
     pub suit: Suit,
