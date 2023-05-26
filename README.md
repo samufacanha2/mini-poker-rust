@@ -1,6 +1,6 @@
-#How to run the code
+# How to run the code
 
-## if tou have rust installed
+## if you have rust installed
 
 ```bash
 cargo run
