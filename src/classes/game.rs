@@ -37,6 +37,15 @@ impl Game {
         let mut scores = vec![];
 
         for player in &self.players {
+            print!(
+                "\n
+                ------------------------------------
+                \n\n"
+            );
+            let mut score = 0;
+            let mut max_combination_number = 0;
+            let mut combination_number = 0;
+
             let cards = player.cards.clone();
 
             let mut cards = cards
@@ -46,42 +55,55 @@ impl Game {
 
             cards.sort_by(|a, b| a.cmp(b));
 
-            print!("Player {} {:?}, ", player.id, cards);
+            for i in 0..3 {
+                for j in (i + 1)..4 {
+                    for k in (j + 1)..5 {
+                        combination_number += 1;
+                        let cards = [cards[i], cards[j], cards[k]];
 
-            let mut consecutive_cards = 0;
+                        print!(
+                            "Player {}, combination #{} : {:?}, ",
+                            player.id, combination_number, cards
+                        );
 
-            for i in 0..cards.len() - 1 {
-                if cards[i].value as i8 + 1 == cards[i + 1].value as i8 {
-                    consecutive_cards += 1;
+                        let mut consecutive_cards = 0;
+
+                        for i in 0..cards.len() - 1 {
+                            if cards[i].value as i8 + 1 == cards[i + 1].value as i8 {
+                                consecutive_cards += 1;
+                            }
+                        }
+
+                        print!("Consecutive cards: {}, ", consecutive_cards);
+
+                        let mut same_suit = 0;
+
+                        for i in 0..cards.len() - 1 {
+                            if cards[i].suit == cards[i + 1].suit {
+                                same_suit += 1;
+                            }
+                        }
+
+                        println!("Same suit: {}\n", same_suit);
+
+                        let current_score = 2 * consecutive_cards + same_suit;
+
+                        if current_score > score {
+                            score = current_score;
+                            max_combination_number = combination_number;
+                        }
+                    }
                 }
             }
-
-            println!("Consecutive cards: {}, ", consecutive_cards);
-
-            let mut same_suit = 0;
-
-            for i in 0..cards.len() - 1 {
-                if cards[i].suit == cards[i + 1].suit {
-                    same_suit += 1;
-                }
-            }
-
-            println!("Same suit: {}, ", same_suit);
-
-            let score = 2 * consecutive_cards + same_suit;
-
             scores = scores.iter().chain(vec![score].iter()).cloned().collect();
 
-            println!("obtaining a score of {:?}\n", score);
+            println!(
+                "Player {} obtained a maximum score of {:?} in combination #{}",
+                player.id, score, max_combination_number
+            );
         }
 
         self.set_scores(scores);
-
-        println!(
-            "Winner: {:?}, with a score of {:?}",
-            self.players.iter().max(),
-            self.players.iter().max().unwrap().score
-        );
     }
 }
 
@@ -89,7 +111,7 @@ impl Debug for Game {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(
             f,
-            "Players: {:?} \nTable Cards: {:?}\n",
+            "Players: {:?} \n\nTable Cards: {:?}\n",
             self.players, self.table_cards
         )
     }
