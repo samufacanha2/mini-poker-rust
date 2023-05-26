@@ -1,4 +1,4 @@
-use super::{card::Card, enums::{Suit, CardValue}};
+use super::{card::Card, card_suit::Suit, card_value::CardValue};
 
 pub struct Deck {
     pub cards: Vec<Card>,
@@ -39,7 +39,6 @@ impl Deck {
         Deck { cards }
     }
 
-
     pub fn deal(&mut self, number: i8) -> Vec<Card> {
         let mut cards = Vec::new();
 
@@ -54,5 +53,4 @@ impl Deck {
         use rand::seq::SliceRandom;
         self.cards.shuffle(&mut rand::thread_rng());
     }
-
 }
