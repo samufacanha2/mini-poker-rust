@@ -13,11 +13,11 @@
 ## if you have rust installed
 
 ```bash
-cargo run
+cargo docker-run
 ```
 
 ## if you don't have rust installed, but have docker
 
 ```bash
-    make build && make run
+    make docker-build && make docker-run
 ```

@@ -72,6 +72,9 @@ impl Game {
                             if cards[i].value as i8 + 1 == cards[i + 1].value as i8 {
                                 consecutive_cards += 1;
                             }
+                            if cards[i].value as i8 == 1 && cards[i + 1].value as i8 == 13 {
+                                consecutive_cards += 1;
+                            }
                         }
 
                         print!("Consecutive cards: {}, ", consecutive_cards);

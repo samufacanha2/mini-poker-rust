@@ -1,7 +1,14 @@
+# Default build
+	cargo build
+
+# Build for windows
+build-windows:
+	cargo build --target=x86_64-pc-windows-gnu --verbose
+
 # Build the Docker image
-build:
+docker-build:
 	docker build -t mini-poker .
 
 # Run the Docker container
-run:
+docker-run:
 	docker run mini-poker
