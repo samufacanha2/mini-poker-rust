@@ -1,8 +1,17 @@
-use std::io::{stdin, Read};
+use std::{
+    io::{stdin, Read},
+    process::Command,
+};
 
 pub mod classes;
 
 fn main() {
+    if cfg!(target_os = "windows") {
+        Command::new("cmd")
+            .output()
+            .expect("failed to execute process");
+    }
+
     let mut game = classes::game::Game::new();
     println!("{:?}", game);
     game.calculate_score();
