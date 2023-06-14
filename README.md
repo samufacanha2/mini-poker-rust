@@ -8,7 +8,9 @@
 
 ## if you are using Windows
 
-    access the .exe in the builds/windows folder
+    access the .exe in the builds/windows folder from the command line
+
+> You must run the .exe from the command line, otherwise it will behave strangely
 
 ## if you have rust installed
 

@@ -45,6 +45,7 @@ impl Game {
             let mut score = 0;
             let mut max_combination_number = 0;
             let mut combination_number = 0;
+            let mut max_combination_cards: Vec<&Card> = vec![];
 
             let cards = player.cards.clone();
 
@@ -94,6 +95,7 @@ impl Game {
                         if current_score > score {
                             score = current_score;
                             max_combination_number = combination_number;
+                            max_combination_cards = cards.to_vec();
                         }
                     }
                 }
@@ -101,8 +103,8 @@ impl Game {
             scores = scores.iter().chain(vec![score].iter()).cloned().collect();
 
             println!(
-                "Player {} obtained a maximum score of {:?} in combination #{}",
-                player.id, score, max_combination_number
+                "\n\tPlayer {} obtained a maximum score of {:?} in combination #{}, with cards {:?}",
+                player.id, score, max_combination_number, max_combination_cards
             );
         }
 
